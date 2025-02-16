@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<header>
+    <div th:insert="~{fragment :: header}"></div>
+</header>
+    <body>
+        <div>
+            <label for="id">UUID:
+                <div id="id" th:text="${product.id}">Text</div>
+            </label><br>
+            <label for="name">Name:
+                <div id="name" th:text="${product.name}">Text</div>
+            </label><br>
+            <label for="category">Category:
+                <div id="category" th:text="${product.category}">Text</div>
+            </label><br>
+            <label for="description">Description:
+                <div id="description" th:text="${product.description}">Text</div>
+            </label><br>
+            <label for="price">Price:
+                <div id="price" th:text="${product.price}">Text</div>
+            </label><br>
+            <label for="quantity">Quantity:
+                <div id="quantity" th:text="${product.quantity}">Text</div>
+            </label><br>
+            <label for="sku">SKU:
+                <div id="sku" th:text="${product.sku}">Text</div>
+            </label><br>
+            <label for="createdAt">Created at:
+                <div id="createdAt" th:text="${product.createdAt}">Text</div>
+            </label><br>
+            <label for="createdBy">Owner:
+                <div id="createdBy" th:text="${product.owner}">Text</div>
+            </label><br>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <div th:if="${check}">
+                <form th:action="@{/favorites/delete}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.id}"/>
+                    <button type="submit">Remove favorite</button>
+                </form>
+            </div>
+            <div th:unless="${check}">
+                <form th:action="@{/favorites}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.id}"/>
+                    <button type="submit">Add favorite</button>
+                </form>
+            </div>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/chats}" method="post">
+                <input type="hidden" name="name" th:value="${product.name}">
+                <input type="hidden" name="owner" th:value="${product.owner}">
+                <input type="hidden" name="topic" th:value="${product.id}">
+                <button type="submit">Massage</button>
+            </form>
+            <div>
+                <a th:href="@{'/products/' + ${product.id} + '/update'}" methods="get"><button type="submit">Update</button></a>
+            </div>
+        </div>
+    </body>
+</html>

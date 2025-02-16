@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<header>
+    <div th:insert="~{fragment :: header}"></div>
+</header>
+    <body>
+        <form action="/users" method="get">
+            <label for="username">Username:
+                <input id="username" type="text" name="username" th:value="${filter.username}">
+            </label><br>
+            <label for="page">Page:
+                <input id="page" type="number" name="page" th:value="${users.metadata.page}">
+            </label>
+            <label for="size">Size:
+                <input id="size" type="number" name="size" th:value="${users.metadata.size}">
+            </label>
+            <button type="submit">Filter</button>
+        </form>
+        <div th:each="user: ${users.content}">
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.username}">User</a>
+        </div>
+    </body>
+</html>

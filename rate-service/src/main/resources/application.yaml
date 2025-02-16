@@ -1,0 +1,8 @@
+spring.application:
+    name: rate-service
+
+app:
+    rate:
+        value: 97.98
+server:
+    port: 8080

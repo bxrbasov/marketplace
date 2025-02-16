@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+    <header>
+        <div th:insert="~{fragment :: header}"></div>
+    </header>
+    <body>
+        <form action="/products" method="get">
+            <label for="name">Name:
+                <input id="name" type="text" name="name" th:value="${filter.name}">
+            </label>
+            <label for="description">Description:
+                <input id="description" type="text" name="description" th:value="${filter.description}">
+            </label>
+            <div th:each="category : ${categories}">
+                <input th:id="${category}" type="radio" name="category" th:value="${category}" th:checked="${category == filter.category}">
+                <label th:for="${category}" th:text="${category}">Category</label>
+            </div>
+            <label for="priceFrom">Price from:
+                <input id="priceFrom" type="number" name="priceFrom" th:value="${filter.priceFrom}">
+            </label>
+            <label for="priceTo">Price to:
+                <input id="priceTo" type="number" name="priceTo" th:value="${filter.priceTo}">
+            </label>
+            <label for="quantityFrom">Quantity from:
+                <input id="quantityFrom" type="number" name="quantityFrom" th:value="${filter.quantityFrom}">
+            </label>
+            <label for="quantityTo">Quantity to:
+                <input id="quantityTo" type="number" name="quantityTo" th:value="${filter.quantityTo}">
+            </label>
+            <label for="createdAtFrom">Created from:
+                <input id="createdAtFrom" type="date" name="createdAtFrom" th:value="${filter.createdAtFrom}">
+            </label>
+            <label for="createdAtTo">Created to:
+                <input id="createdAtTo" type="date" name="createdAtTo" th:value="${filter.createdAtTo}">
+            </label>
+            <br>
+            <label for="page">Page:
+                <input id="page" type="number" name="page" th:value="${products.metadata.page}">
+            </label>
+            <label for="size">Size:
+                <input id="size" type="number" name="size" th:value="${products.metadata.size}">
+            </label>
+            <button type="submit">Filter</button>
+        </form>
+        <form action="/products/create" method="get">
+            <button type="submit">Create product</button>
+        </form>
+        <div th:each="product: ${products.content}">
+                <a th:href="@{'/products/' + ${product.id}}" th:text="${product.name}">Product</a>
+        </div>
+    </body>
+</html>

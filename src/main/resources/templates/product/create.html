@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create product</title>
+</head>
+<header>
+    <div th:insert="~{fragment :: header}"></div>
+</header>
+<body>
+    <form th:action="@{/products}" method="post">
+            <label for="name">Name:
+                <input id="name" type="text" name="name" th:value="${product.name}">
+            </label><br>
+            <label for="description">Description:
+                <input id="description" type="text" name="description" th:value="${product.description}">
+            </label><br>
+            <div th:each="category : ${categories}">
+                <input th:id="${category}" type="radio" name="category" th:value="${category}" th:checked="${category == product.category}">
+                <label th:for="${category}" th:text="${category}">Category</label>
+            </div><br>
+            <label for="price">Price:
+                <input id="price" type="number" name="price" th:value="${product.price}">
+            </label><br>
+            <label for="quantity">Quantity:
+                <input id="quantity" type="number" name="quantity" th:value="${product.quantity}">
+            </label><br>
+            <label for="sku">SKU:
+                <input id="sku" type="text" name="sku" th:value="${product.sku}">
+            </label><br>
+            <label for="owner">
+                <input id="owner" type="hidden" name="owner" th:value="${user.id}">
+            </label><br>
+            <button type="submit">Create</button>
+        </form>
+    <div th:if="${errors}">
+        <p style="color: darkred" th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message</p>
+    </div>
+</body>
+</html>

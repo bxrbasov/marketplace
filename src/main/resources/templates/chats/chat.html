@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+</head>
+    <header>
+        <div th:insert="~{fragment :: header}"></div>
+    </header>
+    <body>
+        <a th:href="@{'/products/' + ${chat.product.id}}"><div th:text="${chat.product.name}">Name</div></a>
+        <div th:each="user: ${chat.users}">
+            <div th:unless="${user.username eq #authentication.principal.username}">
+                <a th:href="@{'/users/' + ${user.id}}" th:text="${user.username}">User</a>
+            </div>
+        </div>
+        <form th:action="@{'/chats/' + ${chat.id} + '/delete'}" method="post">
+            <button type="submit">Delete chat</button>
+        </form>
+        <div th:each="message: ${chat.messages}">
+            <div th:text="${message.createdAt}">Date</div>
+            <div th:text="${message.owner} + ': ' + ${message.content}"></div>
+        </div>
+        <form th:action="@{'/chats/' + ${chat.id} + '/messages'}" method="post">
+            <input type="text" name="content">
+            <button type="submit">Send message</button>
+        </form>
+    </body>
+</html>

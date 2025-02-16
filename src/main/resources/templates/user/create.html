@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<header>
+    <div th:insert="~{fragment :: header}"></div>
+</header>
+<body>
+    <form method="post" th:action="@{/users}" th:object="${user}">
+        <label for="username">Username:
+            <input id="username" type="text" name="username" th:value="${user.username}">
+        </label><br>
+        <label for="email">Email:
+            <input id="email" type="email" name="email" th:value="${user.email}">
+        </label><br>
+        <label for="password">Password:
+            <input id="password" type="password" name="password">
+        </label><br>
+        <label for="repeatedPassword">Repeat password:
+            <input id="repeatedPassword" type="password" name="repeatedPassword">
+        </label><br>
+        <button type="submit">Register</button>
+    </form>
+    <div th:if="${errors}">
+        <p style="color: darkred" th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message</p>
+    </div>
+</body>
+</html>

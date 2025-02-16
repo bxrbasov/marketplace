@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: marketplace
+
+  datasource:
+    hikari:
+      username: test
+      password: test
+
+  jpa:
+    properties:
+      hibernate:
+        hdm2ddl.auto: update

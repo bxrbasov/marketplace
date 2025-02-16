@@ -1,0 +1,44 @@
+app:
+    scheduling:
+        enabled: false
+        period: 30000
+    file:
+        path: C:\\Users\\admin\\OneDrive\\Рабочий стол\\ProjectsForGit\\marketplace\\src\\main\\resources\\reports\\
+    download-upload:
+        path: C:\\Users\\admin\\OneDrive\\Рабочий стол\\ProjectsForGit\\marketplace\\src\\main\\resources\\files\\
+    json:
+        path: C:\\Users\\admin\\OneDrive\\Рабочий стол\\ProjectsForGit\\marketplace\\src\\main\\resources\\static\\dollar_exchange_rate.json
+    feign-client:
+        url: http://localhost:8080/
+server:
+    port: 8081
+
+spring:
+    application:
+        name: marketplace
+    datasource:
+        url: jdbc:postgresql://localhost:5435/marketplace
+        hikari:
+            username: postgres
+            password: password
+            driver-class-name: org.postgresql.Driver
+    jpa:
+        properties:
+            hibernate:
+                show_sql: true
+                format_sql: true
+                hbm2ddl.auto: update
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    redis:
+      jedis:
+        pool:
+          host: localhost
+          port: 6379
+      time-to-live: 60
+
+logging:
+    level:
+        root: info
+    file:
+        path: /
+        name: logs/mylog.log
